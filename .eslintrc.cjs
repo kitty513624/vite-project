@@ -2,14 +2,20 @@ module.exports = {
 	root: true, // ESLint 一旦发现配置文件中有 "root": true，它就会停止在父级目录中寻找
 	env: {
     browser: true, // 浏览器环境中的全局变量
-		node: true, // Node.js 全局变量和 Node.js 作用域
-		es2021: true // 启用除了 modules 以外的所有 ECMAScript 6 特性
+		es2021: true, // 启用除了 modules 以外的所有 ECMAScript 6 特性
+    node: true // Node.js 全局变量和 Node.js 作用域
+	},
+  settings: {
+		react: {
+			version: "detect"
+		}
 	},
 	extends: [
     'eslint:recommended', 
     'plugin:react/recommended', 
     'plugin:@typescript-eslint/recommended',
     "plugin:react-hooks/recommended",
+    'plugin:react/jsx-runtime',
 		"plugin:prettier/recommended",
   ],
 	/* 指定如何解析语法 */
@@ -55,5 +61,9 @@ module.exports = {
 	// 	"react-hooks/rules-of-hooks": "error",
 	// 	"react-hooks/exhaustive-deps": "off"
 	// }
-  rules: {}
+  rules: {
+    "prettier/prettier": "error",
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off"
+  }
 };

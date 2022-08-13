@@ -9,7 +9,7 @@
     "build": "tsc && vite build --mode production",
     "preview": "vite preview",
     "prepare": "husky install",
-    "lint:eslint": "eslint --fix --ext .js,.ts,.tsx ./src",
+    "lint:eslint": "eslint --fix --ext .js,.jsx,.ts,.tsx ./src",
     "lint:prettier": "prettier --write --loglevel warn \"src/**/*.{js,ts,json,tsx,css,less,scss,html,md}\"",
     "json-server": "json-server __json_server_mock__/db.json --watch --port 3001"
   },
