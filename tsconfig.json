@@ -1,0 +1,54 @@
+{
+  "extends": "./paths.json",
+  "compilerOptions": {
+    "target": "ESNext", /**指定ECMAScript目标版本**/
+    "experimentalDecorators": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true, /**允许编译js文件**/
+    "skipLibCheck": true, /**忽略所有的声明文件的类型检查**/
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true, /**允许使用import方式导入**/
+    "strict": true, /**启用所有严格类型检查选项**/
+    "forceConsistentCasingInFileNames": true, /**禁止对同一个文件的不一致的引用**/
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext", /**指定生成哪个模块系统代码**/ 
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx" /**支持JSX**/,
+    "noImplicitAny": false /**在表达式和声明上有隐含的any类型时报错**/,
+    // "baseUrl": ".", //paths路劲解析起点
+    // "paths": {
+    //   "@store/*": ["src/store/*" ],
+    //   "@/*": ["src/*"]
+    // }
+  },
+  "include": ["src"]
+}
+
+// {
+//   "compilerOptions": {
+//     "target": "ESNext",
+//     "useDefineForClassFields": true,
+//     "lib": ["DOM", "DOM.Iterable", "ESNext"],
+//     "allowJs": false,
+//     "skipLibCheck": true,
+//     "esModuleInterop": false,
+//     "allowSyntheticDefaultImports": true,
+//     "strict": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "module": "ESNext",
+//     "moduleResolution": "Node",
+//     "resolveJsonModule": true,
+//     "isolatedModules": true,
+//     "noEmit": true,
+//     "jsx": "react-jsx"
+//   },
+//   "include": ["src"],
+//   "references": [{ "path": "./tsconfig.node.json" }]
+// }

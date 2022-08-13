@@ -1,0 +1,57 @@
+{
+  "name": "vite-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "start": "vite --mode development",
+    "test": "vite --mode test",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "build:dev": "tsc && vite build --mode development",
+    "build:test": "tsc && vite build --mode test",
+    "build:pro": "tsc && vite build --mode production",
+    "prepare": "husky install",
+    "lint:eslint": "eslint --fix --ext .js,.ts,.tsx ./src",
+    "lint:prettier": "prettier --write --loglevel warn \"src/**/*.{js,ts,json,tsx,css,less,scss,html,md}\"",
+    "json-server": "json-server __json_server_mock__/db.json --watch --port 3001"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/lab": "^5.0.0-alpha.94",
+    "@mui/material": "^5.10.0",
+    "@types/react-dom": "^18.0.6",
+    "antd": "^4.22.4",
+    "axios": "^0.27.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-query": "^4.0.0",
+    "react-router-dom": "^6.3.0",
+    "react-socks": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.1",
+    "@types/react": "^18.0.15",
+    "@typescript-eslint/eslint-plugin": "^5.33.0",
+    "@typescript-eslint/parser": "^5.33.0",
+    "@vitejs/plugin-react": "^2.0.0",
+    "eslint": "^8.21.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": ">=6",
+    "json-server": "^0.17.0",
+    "lint-staged": ">=10",
+    "prettier": "2.7.1",
+    "sass": "^1.54.4",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.0"
+  },
+  "lint-staged": {
+    "*.{js,css,md,ts,tsx}": "prettier --write"
+  }
+}

@@ -1,0 +1,49 @@
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  // margin: 20px 0;
+  span {
+    display: inline-block;
+    margin-right: 5px;
+    width: 5px;
+    height: 28px;
+    vertical-align: middle;
+    background-color: #1890ff;
+  }
+}
+.border {
+  border-top: 2px solid #b5b5b5;
+  padding: 10px 0px;
+}
+.no_border {
+  padding: 0;
+}
+.bg {
+  // background-color: #f0f0f0;
+  background-color: rgba($color: #1890ff, $alpha: 0.08);
+  padding: 10px 20px;
+}
+.conven-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.fundName-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+.title1 {
+  font-size: 16px;
+  padding-top: 10px;
+  border-top: #b5b5b5 solid 2px;
+}
+.search-popup-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+.search-title {
+  @extend .title;
+  font-size: 16px;
+  span {
+    height: 18px;
+  }
+}
