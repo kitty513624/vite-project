@@ -1,41 +1,50 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
-// import getEnv from '@/config/getEnv';
-// import { message } from 'antd';
-// const baseURL = getEnv();
-// const baseURL = 'http://localhost:3001/users';
 type Result<T> = {
   code: number;
-  // message: string;
+  message: string;
   result: T;
 };
-class Request {
-  // axiosをインスタンスする
-  instance: AxiosInstance;
-  // 基本的な構成、urlとタイムアウト時間
-  baseConfig: AxiosRequestConfig = { baseURL: '/api', timeout: 60000 };
-  // baseConfig: AxiosRequestConfig = { baseURL, timeout: 60000 };
-  // baseConfig: AxiosRequestConfig = { baseURL: 'http://localhost:3001', timeout: 60000 };
 
-  constructor(config: AxiosRequestConfig) {
-    // axios.createを利用しaxiosをインスタンスする
-    this.instance = axios.create(Object.assign(this.baseConfig, config));
+const config = {
+  // 默认地址请求地址，可在 .env 开头文件中修改
+  baseURL: import.meta.env.VITE_API_URL as string,
+  // 设置超时时间（10s）
+  timeout: 10000,
+  // 跨域时候允许携带凭证
+  withCredentials: true
+};
 
-    this.instance.interceptors.request.use(
+class RequestHttp {
+  service: AxiosInstance;
+  public constructor(config: AxiosRequestConfig) {
+    // 实例化axios
+    this.service = axios.create(config);
+    /**
+     * @description 请求拦截器
+     * 客户端发送请求 -> [请求拦截器] -> 服务器
+     * token校验(JWT) : 接受服务器返回的token,存储到redux/本地储存/...当中
+     */
+    this.service.interceptors.request.use(
       (config: AxiosRequestConfig) => {
         // 普通、LocalStorageからトークンを取得する
         // const token = localStorage.getItem("token");
         // console.log( config.headers , 'config')
         // config.headers["Authorization"] = 'token';
-
+        // const token: string = store.getState().global.token;
         return config;
+        // return { ...config, headers: { ...config.headers, 'x-access-token': token } };
       },
       (err: AxiosError) => {
         return Promise.reject(err);
       }
     );
 
-    this.instance.interceptors.response.use(
+    /**
+     * @description 响应拦截器
+     *  服务器换返回信息 -> [拦截统一处理] -> 客户端JS获取到信息
+     */
+    this.service.interceptors.response.use(
       (res: AxiosResponse) => {
         // resを返却する。あるいはres.dataのみ返却するのも可能。
         return res.data;
@@ -44,7 +53,6 @@ class Request {
         const { response } = err;
         // HTTPエラーを処理し、メッセージを提示する。
         console.log(err, 'err-------------');
-        // if (response) checkStatus(response.status);
         let errormessage = '';
         switch (response?.status) {
           case 400:
@@ -93,35 +101,13 @@ class Request {
       }
     );
   }
-
-  // リクエストメソッド定義
-  public request(config: AxiosRequestConfig): Promise<AxiosResponse> {
-    return this.instance.request(config);
+  // * 常用请求方法封装
+  get<T>(url: string, params?: object, _object = {}): Promise<AxiosResponse<Result<T>>> {
+    return this.service.get(url, { params, ..._object });
   }
-
-  // 常用请求方法封装
-  public get<T = any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<Result<T>>> {
-    return this.instance.get(url, config);
+  post<T>(url: string, params?: object, _object = {}): Promise<AxiosResponse<Result<T>>> {
+    return this.service.post(url, params, _object);
   }
-  public post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<AxiosResponse<Result<T>>> {
-    return this.instance.post(url, data, config);
-  }
-
-  // public put<T = any>(
-  //   url: string,
-  //   data?: any,
-  //   config?: AxiosRequestConfig
-  // ): Promise<AxiosResponse<Result<T>>> {
-  //   return this.instance.put(url, data, config);
-  // }
-
-  // public delete<T = any>(
-  //   url: string,
-  //   config?: AxiosRequestConfig
-  // ): Promise<AxiosResponse<Result<T>>> {
-  //   return this.instance.delete(url, config);
-  // }
 }
 
-const Res = new Request({});
-export default Res;
+export default new RequestHttp(config);

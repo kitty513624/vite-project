@@ -1,5 +1,6 @@
 @import "../../styles/shared.scss";
 .headerBar {
+  margin-bottom: 10px;
   .header {
     padding: 20px 0;
     display: flex;
@@ -7,6 +8,15 @@
     max-width: 1000px;
     width: 100%;
     margin: auto;
+    .headerRight{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .headerRightItem{
+        margin: 0 10px 0 10px;
+        color: #1890ff;
+      }
+    }
   }
 
   .header2 {
@@ -16,84 +26,109 @@
     max-width: 1000px;
     width: 100%;
     margin: auto;
-  }
-
-  .menu {
-    background-color: $color-blue;
-    margin-bottom: 20px;
-    line-height: 40px;
-
-    .menuList {
+    .headerRight{
       display: flex;
-      justify-content: space-between;
-      max-width: 1000px;
-      width: 100%;
-      margin: auto;
-      color: $color-white;
-
-      .menuBox {
-        cursor: pointer;
-        padding: 0 10px;
-        position: relative;
-
-        .down {
-          position: absolute;
-          left: 0;
-          top: 40px;
-          background: $color-white;
-          color: #333;
-          width: 200px;
-          z-index: 99;
-          box-shadow: 1px 5px 5px rgba($color: #000000, $alpha: 0.5);
-          transition: 0.5s all;
-          opacity: 0;
-          height: 0;
-          overflow: hidden;
-
-          >li {
-            padding: 0 20px;
-
-            &:hover {
-              background-color: $color-blue;
-              color: $color-white;
-            }
-          }
-        }
-      }
-
-      .menuBox:hover .down {
-        opacity: 1;
-        height: 100%;
-        display: inline-table;
-      }
-
-      .active {
-        background-color: #0e74d4;
+      // justify-content: space-between;
+      // align-items: center;
+      .headerRightItem{
+        margin: 0 10px 0 10px;
+        color: #1890ff;
       }
     }
   }
 
-  .menu2 {
-    max-width: 1000px;
-    width: 100%;
-    margin: auto;
-    ul {
-      margin-bottom: 20px;
-      line-height: 40px;
-      color: $color-white !important;
-
-      li {
-        background-color: $color-blue !important;
-        &:hover {
-          background-color: $color-blue !important;
-          color: $color-white !important;
-          div{
-            &:hover{
-              color: $color-white !important;
-            }
-          }
-        }
+  .menu{
+    :global{
+      .MuiToolbar-regular{
+        min-height: 0;
       }
     }
   }
+
+
+  // .menu {
+  //   background-color: $color-blue;
+  //   margin-bottom: 20px;
+  //   line-height: 40px;
+
+  //   .menuList {
+  //     display: flex;
+  //     justify-content: space-between;
+  //     max-width: 1000px;
+  //     width: 100%;
+  //     margin: auto;
+  //     color: $color-white;
+
+  //     .menuBox {
+  //       cursor: pointer;
+  //       padding: 0 10px;
+  //       position: relative;
+
+  //       .down {
+  //         position: absolute;
+  //         left: 0;
+  //         top: 40px;
+  //         background: $color-white;
+  //         color: #333;
+  //         width: 200px;
+  //         z-index: 99;
+  //         box-shadow: 1px 5px 5px rgba($color: #000000, $alpha: 0.5);
+  //         transition: 0.5s all;
+  //         opacity: 0;
+  //         height: 0;
+  //         overflow: hidden;
+
+  //         >li {
+  //           padding: 0 20px;
+
+  //           &:hover {
+  //             background-color: $color-blue;
+  //             color: $color-white;
+  //           }
+  //         }
+  //       }
+  //     }
+
+  //     .menuBox:hover .down {
+  //       opacity: 1;
+  //       height: 100%;
+  //       display: inline-table;
+  //     }
+
+  //     .active {
+  //       background-color: #0e74d4;
+  //     }
+  //   }
+  // }
+
+  // .menu2 {
+  //   max-width: 1000px;
+  //   width: 100%;
+  //   margin: auto;
+  //   ul {
+  //     margin-bottom: 20px;
+  //     line-height: 40px;
+  //     color: $color-white !important;
+
+  //     li {
+  //       background-color: $color-blue !important;
+  //       &:hover {
+  //         background-color: $color-blue !important;
+  //         color: $color-white !important;
+  //         div{
+  //           &:hover{
+  //             color: $color-white !important;
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 }
+
+:global{
+  MuiTouchRipple-root: {
+		display: none;
+	}
+}
+

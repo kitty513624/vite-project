@@ -1,15 +1,15 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import NotFound from '@components/notfound/Notfound';
-import Index from '../pages/index3';
+import Index from '../pages/index';
 
 const BaseRouter = () => {
-	return (
-		<Routes>
-			<Route path="/" element={<Navigate to="/index" />} />
-			<Route path="/index" element={<Index />} />
-			<Route element={<NotFound />} />
-		</Routes>
-	);
+  return (
+    <Routes>
+      <Route path="/" element={<Navigate to="/index" />} />
+      <Route path="/index" element={<Index />} />
+      <Route element={<NotFound />} />
+    </Routes>
+  );
 };
 
 export default BaseRouter;
