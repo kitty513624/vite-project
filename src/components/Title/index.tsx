@@ -1,5 +1,4 @@
-import React from 'react';
-import s from './index.module.scss';
+import styles from './index.module.scss';
 interface Pdata {
   name?: string;
   type?: string | number;
@@ -8,8 +7,8 @@ interface Pdata {
 }
 const Title = (props: Pdata) => {
   return (
-    <div className={[s[props.type || 'border'], s[props.title]].join(' ')}>
-      <span /> {props.name || 'タイトル'}
+    <div className={[styles[props.type || 'border'], styles[props.title]].join(' ')}>
+      <span> {props.name || 'タイトル'} </span>
     </div>
   );
 };

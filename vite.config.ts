@@ -38,7 +38,8 @@ export default defineConfig(({ mode, command }) => {
 
         '@layouts': pathResolve('src/layouts'),
         '@images': pathResolve('src/images'),
-        '@styles': pathResolve('src/styles')
+        '@styles': pathResolve('src/styles'),
+        '@types': pathResolve('src/types')
       }
     },
     //配置代理解决跨域
@@ -47,13 +48,21 @@ export default defineConfig(({ mode, command }) => {
       // 代理跨域（mock 不需要配置，这里只是个事列）
       proxy: {
         '/api': {
-          target: 'http://192.168.1.113:8080/',
+          target: 'http://192.168.0.28:8080/',
           changeOrigin: true,
 
           headers: {
-            host: 'http://192.168.1.113:8080',
-            origin: 'http://192.168.1.113:8080'
+            host: 'http://192.168.0.28:8080',
+            origin: 'http://192.168.0.28:8080'
           },
+          // '/api': {
+          //   target: 'http://192.168.1.113:8080/',
+          //   changeOrigin: true,
+
+          //   headers: {
+          //     host: 'http://192.168.1.113:8080',
+          //     origin: 'http://192.168.1.113:8080'
+          //   },
           // rewrite: path => path.replace(/^\/api/, "/api"),
           // pathRewrite: {
           //     "^api": "/api"

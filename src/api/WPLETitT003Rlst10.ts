@@ -9,12 +9,4 @@ function fetchHomeList(params: { fundName: string }) {
 // 	return axios.post('/searchFundByName', data);
 // }
 
-function getUser() {
-  return axios.get('/users');
-}
-
-function postUser() {
-  return axios.post('/users');
-}
-
-export { fetchHomeList, getUser, postUser };
+export { fetchHomeList };

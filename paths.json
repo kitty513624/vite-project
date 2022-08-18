@@ -16,7 +16,8 @@
         "@layouts/*": ["src/layouts/*" ],
         "@images/*": ["src/images/*" ],
         "@styles/*": ["src/styles/*" ],
-        "@services/*": ["src/services/*" ]
+        "@services/*": ["src/services/*" ],
+        "@types/*": ["src/types/*" ]
        }
     }
   }

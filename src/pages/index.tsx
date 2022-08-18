@@ -8,20 +8,10 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import Demo from '@components/Demo/index';
+// import Demo from '@components/Demo/index';
+import Demo from '@components/Demo/index2';
 import Sample from '@components/Sample/page/Sample';
 import { useAuth } from '@/context/auth-context';
-import { useQuery } from 'react-query';
-
-// import Tutorial from "../types/Tutorial";
-// import TutorialService from "../services/TutorialService";
-// import Tutorial from "../types/Tutorial";
-import { fetchHomeList } from '@/api/WPLETitT003Rlst10';
-
-// import { http } from '@utils/http';
-// import useGithubIssuesQuery from '@utils/issuesQuery';
-
-// const { TabPane } = Tabs;
 
 const Index = () => {
   const [activeKey, setActiveKey] = useState('1');
@@ -29,37 +19,11 @@ const Index = () => {
     setActiveKey(newValue);
   };
   const { token } = useAuth();
-  // console.log(token, '-----token-----');
-
-  // const data = useQuery(['issues'], http)
-  // console.log(data, '-------data issues-------');
-  // const data = useGithubIssuesQuery('facebook','react');
-  // console.log(data, '-------------useGithubIssuesQuery-------------');
-
-  // const [getResult, setGetResult] = useState<string | null>(null);
-  // const fortmatResponse = (res: any) => {
-  // 	return JSON.stringify(res, null, 2);
-  // };
-
-  // const {
-  // 	data: fetchHomeListData,
-  // 	isLoading: isLoadingTutorials,
-  // 	// eslint-disable-next-line
-  // 	refetch: getAllTutorials
-  // } = useQuery(['fetch-home-list'], async () => {
-  // 	return await fetchHomeList('');
-  // });
-  // console.log(isLoadingTutorials, '-------测试isLoadingTutorials-------');
-  // console.log(fetchHomeListData, '-------测试react-query-------');
+  console.log(token, '-----token-----');
 
   return (
     <DefaultLayout>
-      {/* <Tabs defaultActiveKey="1" type="card" activeKey={activeKey}>
-                <TabPane tab={<span>　投信　<br />(金額買付)</span>} key="1">
-                </TabPane>
-            </Tabs> */}
       <TabContext value={activeKey}>
-        {/* <Box> */}
         <TabList onChange={handleChange}>
           <Tab
             label={
@@ -134,7 +98,6 @@ const Index = () => {
             value="9"
           />
         </TabList>
-        {/* </Box> */}
         <TabPanel value="1">
           <Demo />
         </TabPanel>

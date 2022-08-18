@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, FC } from 'react';
+import { useState, useEffect, FC } from 'react';
 import { useTheme } from '@mui/material/styles';
 import {
   Box,
@@ -20,9 +20,10 @@ import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 import s from './index.module.scss';
 import no_collection from '@images/no_collection.png';
 import collection from '@images/collection.png';
-import red_star from '@images/red_star.png';
+// import red_star from '@images/red_star.png';
 import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import Rating from '@mui/material/Rating';
 import { TablePaginationActionsProps, Pdata } from './components/fieldType';
 import { StyledTableCell } from './components/StyledTableCell';
 import { StyledTableRow } from './components/StyledTableRow';
@@ -34,85 +35,52 @@ import { BootstrapInput } from '@components/BootstrapInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Title from '@components/Title';
-import useTableData from './components/tableData';
+// import useTableData from './components/tableData';
+import { useSelectData, useTableDataModal, useTableDataSearchParams } from './components/tableData2';
+import { useAuth } from '@/context/auth-context';
+// import { useMyTest } from '@/context/sampleContext/sample-context';
 
-function TablePaginationActions(props: TablePaginationActionsProps) {
-  const theme = useTheme();
-  const { count, page, rowsPerPage, onPageChange } = props;
-  console.log(props);
-  const handleFirstPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onPageChange(event, 0);
-  };
-
-  const handleBackButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onPageChange(event, page - 1);
-  };
-
-  const handleNextButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onPageChange(event, page + 1);
-  };
-
-  const handleLastPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-  };
-
-  return (
-    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-      <IconButton onClick={handleFirstPageButtonClick} disabled={page === 0} aria-label="first page">
-        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-      </IconButton>
-      <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
-        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-      </IconButton>
-
-      <IconButton onClick={handleNextButtonClick} disabled={page >= Math.ceil(count / rowsPerPage) - 1} aria-label="next page">
-        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-      </IconButton>
-      <IconButton
-        onClick={handleLastPageButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page"
-      >
-        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
-      </IconButton>
-    </Box>
-  );
-}
-
-const CustomPaginationActionsTable: FC<Pdata> = (props) => {
-  const star = (e: any) => {
-    const list: Array<any> = [];
-    for (let index = 0; index < e; index++) {
-      list.push(
-        <li key={index}>
-          <img style={{ width: 15 }} src={red_star} alt="22" />
-        </li>
-      );
-    }
-    return (
-      <ul className={s.star}>
-        {list.map((p) => {
-          return p;
-        })}
-      </ul>
-    );
-  };
+const CustomPaginationActionsTable: FC<Pdata> = () => {
+  // const star = (e: any) => {
+  // 	const list: Array<any> = [];
+  // 	for (let index = 0; index < e; index++) {
+  // 		list.push(
+  // 			<li key={index}>
+  // 				<img style={{ width: 15 }} src={red_star} alt="22" />
+  // 			</li>
+  // 		);
+  // 	}
+  // 	return (
+  // 		<ul className={s.star}>
+  // 			{list.map((p) => {
+  // 				return p;
+  // 			})}
+  // 		</ul>
+  // 	);
+  // };
   // const [startDate, setStartDate] = useState(new Date());
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   // const [age, setAge] = React.useState('');
   const [sortValue, setSort] = useState('10');
-  const { data, setData } = useTableData(props.activeKey);
-  console.log(data, 'data');
-  const dataSource = data;
-  const handleChange = (event: { target: { value: string } }) => {
-    setSort(event.target.value);
-  };
+  // const { data, setData } = useTableData(props.activeKey);
+  // console.log(data, 'data');
+  // const dataSource = data;
+  const [param, setParam] = useTableDataSearchParams();
+  // console.log(param, '-----param--------');
+  const { value: dataSource, upBtn, downBtn } = useTableDataModal(param);
+  console.log(dataSource, '-------dataSource--------');
+  // const { value: dataSource, upBtn, downBtn } = useArray(tableData);
+  const [selectData] = useSelectData();
+  const { setRowTable } = useAuth();
+  // const handleChange = (event: { target: { value: string } }) => {
+  // 	setSort(event.target.value);
+  // };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - state.dataSource.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - dataSource.length) : 0;
 
   const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
-    console.log(newPage);
+    // console.log(newPage);
     setPage(newPage);
   };
 
@@ -120,11 +88,11 @@ const CustomPaginationActionsTable: FC<Pdata> = (props) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  const heartBtn = (row, index) => {
-    const nData = JSON.parse(JSON.stringify(dataSource));
-    nData[index].heart = !row.heart;
-    setData(nData);
-  };
+  // const heartBtn = (row, index) => {
+  // 	const nData = JSON.parse(JSON.stringify(dataSource));
+  // 	nData[index].heart = !row.heart;
+  // 	setData(nData);
+  // };
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <Title name="检索结果" type="b" title="conven-title" />
@@ -181,14 +149,23 @@ const CustomPaginationActionsTable: FC<Pdata> = (props) => {
                   {row.fq_price}
                 </TableCell>
                 <TableCell style={{ width: 110 }} align="center">
-                  <div>{star(row.star_number)}</div>
+                  <div>
+                    <Rating name="read-only" value={row.star_number} readOnly />
+                  </div>
+                  {/* <div>{star(row.star_number)}</div> */}
                 </TableCell>
                 <TableCell style={{ width: 160 }} align="center">
                   <Button
                     startIcon={<ForwardToInboxIcon />}
                     endIcon={<ChevronRightIcon />}
                     variant="outlined"
-                    onClick={() => alert('c')}
+                    // onClick={(row) => alert('c')}
+                    onClick={() => {
+                      // console.log(row, index, '-------row, index-------');
+                      // const nData = JSON.parse(JSON.stringify(dataSource));
+                      // console.log(nData[index], '-------nData[index]-------');
+                      setRowTable(row ?? []);
+                    }}
                   >
                     {' '}
                     设定{' '}
@@ -208,7 +185,7 @@ const CustomPaginationActionsTable: FC<Pdata> = (props) => {
                       style={{ marginBottom: 5, width: 100 }}
                       onClick={() => {
                         // eslint-disable-next-line
-                        state.buyFund(row.fund_sec_code, index);
+                        // state.buyFund(row.fund_sec_code, index);
                       }}
                     >
                       積立買付
@@ -252,7 +229,7 @@ const CustomPaginationActionsTable: FC<Pdata> = (props) => {
       />
     </Paper>
   );
-
+  // 筛选框部分
   function searchCriteria() {
     return (
       <div className={s.selectionCriteria}>
@@ -260,15 +237,21 @@ const CustomPaginationActionsTable: FC<Pdata> = (props) => {
         <div className={s.sort}>
           <FormControl sx={{ m: 1, minWidth: 220 }}>
             <Select
-              value={sortValue}
-              onChange={handleChange}
+              value={param.fundName}
+              label="请选择"
+              onChange={(event: SelectChangeEvent) => setParam({ ...param, fundName: event.target.value as string })}
               displayEmpty={true}
               inputProps={{ 'aria-label': 'Without label' }}
               input={<BootstrapInput />}
             >
-              <MenuItem value={'10'}>基本面额</MenuItem>
-              <MenuItem value={'20'}>历史数据</MenuItem>
-              <MenuItem value={'30'}>型号等级</MenuItem>
+              {selectData?.map((item) => (
+                <MenuItem key={item.value} value={item.value}>
+                  {item.label}
+                </MenuItem>
+              ))}
+              {/* <MenuItem value={'10'}>基本面额</MenuItem>
+							<MenuItem value={'20'}>历史数据</MenuItem>
+							<MenuItem value={'30'}>型号等级</MenuItem> */}
             </Select>
             {/* <FormHelperText>Without label</FormHelperText> */}
           </FormControl>
@@ -280,45 +263,48 @@ const CustomPaginationActionsTable: FC<Pdata> = (props) => {
       </div>
     );
   }
+  // 分页
+  function TablePaginationActions(props: TablePaginationActionsProps) {
+    const theme = useTheme();
+    const { count, page, rowsPerPage, onPageChange } = props;
+    // console.log(props);
+    const handleFirstPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      onPageChange(event, 0);
+    };
 
-  function upBtn() {
-    let val = '';
-    switch (sortValue) {
-      case '10':
-        val = 'fq_price';
-        break;
-      case '20':
-        val = 'star_number';
-        break;
+    const handleBackButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      onPageChange(event, page - 1);
+    };
 
-      case '30':
-        break;
-    }
-    // eslint-disable-next-line
-    const m = dataSource.sort((a, b) => {
-      return Number(b[val]) - Number(a[val]);
-    });
-    // setDataSource(m)
-  }
+    const handleNextButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      onPageChange(event, page + 1);
+    };
 
-  function downBtn() {
-    let val = '';
-    switch (sortValue) {
-      case '10':
-        val = 'fq_price';
-        break;
-      case '20':
-        val = 'star_number';
-        break;
+    const handleLastPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+    };
 
-      case '30':
-        break;
-    }
-    // eslint-disable-next-line
-    const m = dataSource.sort((a, b) => {
-      return Number(a[val]) - Number(b[val]);
-    });
-    // setDataSource(m)
+    return (
+      <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+        <IconButton onClick={handleFirstPageButtonClick} disabled={page === 0} aria-label="first page">
+          {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+        </IconButton>
+        <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
+          {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+        </IconButton>
+
+        <IconButton onClick={handleNextButtonClick} disabled={page >= Math.ceil(count / rowsPerPage) - 1} aria-label="next page">
+          {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+        </IconButton>
+        <IconButton
+          onClick={handleLastPageButtonClick}
+          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+          aria-label="last page"
+        >
+          {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+        </IconButton>
+      </Box>
+    );
   }
 };
 
