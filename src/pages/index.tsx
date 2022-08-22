@@ -16,149 +16,149 @@ import Nine from '@components/nine/index';
 import { useAuth } from '@/context/auth-context';
 
 const Index = () => {
-  const [activeKey, setActiveKey] = useState('1');
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setActiveKey(newValue);
-  };
-  const { token } = useAuth();
-  console.log(token, '-----token-----');
+    const [activeKey, setActiveKey] = useState('1');
+    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+        setActiveKey(newValue);
+    };
+    const { token } = useAuth();
+    console.log(token, '-----token-----');
 
-  return (
-    <DefaultLayout>
-      <TabContext value={activeKey}>
-        <TabList onChange={handleChange}>
-          <Tab
-            label={
-              <span>
-                　投信　
-                <br />
-                (金額買付)
-              </span>
-            }
-            value="1"
-          />
-          <Tab
-            label={
-              <span>
-                　投信　
-                <br />
-                (口数買付)
-              </span>
-            }
-            value="2"
-          />
-          <Tab
-            label={
-              <span>
-                　投信　
-                <br />
-                (積立買付)
-              </span>
-            }
-            value="3"
-          />
-          <Tab
-            label={
-              <span>
-                新規募集
-                <br />
-                &nbsp;&nbsp;・取扱　
-              </span>
-            }
-            value="4"
-          />
-          <Tab
-            label={
-              <span>
-                外貨建MMF
-                <br />
-                　&nbsp;&nbsp;(買付)
-              </span>
-            }
-            value="5"
-          />
-          <Tab
-            label={
-              <span>
-                外貨建MMF
-                <br />
-                &nbsp;&nbsp;(積立買付)
-              </span>
-            }
-            value="6"
-          />
-          <Tab label="　売却　" value="7" />
-          <Tab label="　売却　" value="8" />
-          <Tab
-            label={
-              <span>
-                注文照会
-                <br />
-                　(取消)
-              </span>
-            }
-            value="9"
-          />
-        </TabList>
-        <TabPanel value="1">
-          <Demo />
-        </TabPanel>
-        <TabPanel value="2">
-          {
-            <span>
-              　投信　
-              <br />
-              (口数買付)
-            </span>
-          }
-        </TabPanel>
-        <TabPanel value="3">
-          <Sample />
-        </TabPanel>
-        <TabPanel value="4">
-          {
-            <span>
-              新規募集
-              <br />
-              &nbsp;&nbsp;・取扱　
-            </span>
-          }
-        </TabPanel>
-        <TabPanel value="5">
-          {
-            <span>
-              外貨建MMF
-              <br />
-              &nbsp;&nbsp;(買付)
-            </span>
-          }
-        </TabPanel>
-        <TabPanel value="6">
-          {
-            <span>
-              外貨建MMF
-              <br />
-              &nbsp;&nbsp;(積立買付)
-            </span>
-          }
-        </TabPanel>
-        <TabPanel value="7">売却</TabPanel>
-        <TabPanel value="8">
-          <Eight />
-        </TabPanel>
-        <TabPanel value="9">
-          <Nine />
-          {/* {
+    return (
+        <DefaultLayout>
+            <TabContext value={activeKey}>
+                <TabList onChange={handleChange}>
+                    <Tab
+                        label={
+                            <span>
+                                　投信　
+                                <br />
+                                (金額買付)
+                            </span>
+                        }
+                        value="1"
+                    />
+                    <Tab
+                        label={
+                            <span>
+                                　投信　
+                                <br />
+                                (口数買付)
+                            </span>
+                        }
+                        value="2"
+                    />
+                    <Tab
+                        label={
+                            <span>
+                                　投信　
+                                <br />
+                                (積立買付)
+                            </span>
+                        }
+                        value="3"
+                    />
+                    <Tab
+                        label={
+                            <span>
+                                新規募集
+                                <br />
+                                &nbsp;&nbsp;・取扱　
+                            </span>
+                        }
+                        value="4"
+                    />
+                    <Tab
+                        label={
+                            <span>
+                                外貨建MMF
+                                <br />
+                                　&nbsp;&nbsp;(買付)
+                            </span>
+                        }
+                        value="5"
+                    />
+                    <Tab
+                        label={
+                            <span>
+                                外貨建MMF
+                                <br />
+                                &nbsp;&nbsp;(積立買付)
+                            </span>
+                        }
+                        value="6"
+                    />
+                    <Tab label="　売却　" value="7" />
+                    <Tab label="　売却　" value="8" />
+                    <Tab
+                        label={
+                            <span>
+                                注文照会
+                                <br />
+                                　(取消)
+                            </span>
+                        }
+                        value="9"
+                    />
+                </TabList>
+                <TabPanel value="1">
+                    <Demo />
+                </TabPanel>
+                <TabPanel value="2">
+                    {
+                        <span>
+                            　投信　
+                            <br />
+                            (口数買付)
+                        </span>
+                    }
+                </TabPanel>
+                <TabPanel value="3">
+                    <Sample />
+                </TabPanel>
+                <TabPanel value="4">
+                    {
+                        <span>
+                            新規募集
+                            <br />
+                            &nbsp;&nbsp;・取扱　
+                        </span>
+                    }
+                </TabPanel>
+                <TabPanel value="5">
+                    {
+                        <span>
+                            外貨建MMF
+                            <br />
+                            &nbsp;&nbsp;(買付)
+                        </span>
+                    }
+                </TabPanel>
+                <TabPanel value="6">
+                    {
+                        <span>
+                            外貨建MMF
+                            <br />
+                            &nbsp;&nbsp;(積立買付)
+                        </span>
+                    }
+                </TabPanel>
+                <TabPanel value="7">売却</TabPanel>
+                <TabPanel value="8">
+                    <Eight />
+                </TabPanel>
+                <TabPanel value="9">
+                    <Nine />
+                    {/* {
             <span>
               注文照会
               <br />
               (取消)
             </span>
           } */}
-        </TabPanel>
-      </TabContext>
-    </DefaultLayout>
-  );
+                </TabPanel>
+            </TabContext>
+        </DefaultLayout>
+    );
 };
 
 export default Index;
