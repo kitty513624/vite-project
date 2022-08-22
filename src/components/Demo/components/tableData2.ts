@@ -53,15 +53,6 @@ export const useTableDataModal = (param: { fundName: string }) => {
       setValue(tableData.outDto.fundInfoList);
     }
   }, [isLoading]);
-
-  // const [value, setValue] = useState([
-  // 	{
-  // 		fq_price: 100
-  // 	},
-  // 	{
-  // 		fq_price: 1200
-  // 	}
-  // ]);
   // console.log(value, '*********** value **********');
   const upBtn = () => {
     const copy = JSON.parse(JSON.stringify(value));

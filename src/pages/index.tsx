@@ -11,6 +11,8 @@ import TabPanel from '@mui/lab/TabPanel';
 // import Demo from '@components/Demo/index';
 import Demo from '@components/Demo/index2';
 import Sample from '@components/Sample/page/Sample';
+import Eight from '@components/eight/index';
+import Nine from '@components/nine/index';
 import { useAuth } from '@/context/auth-context';
 
 const Index = () => {
@@ -141,15 +143,18 @@ const Index = () => {
           }
         </TabPanel>
         <TabPanel value="7">売却</TabPanel>
-        <TabPanel value="8">乗換</TabPanel>
+        <TabPanel value="8">
+          <Eight />
+        </TabPanel>
         <TabPanel value="9">
-          {
+          <Nine />
+          {/* {
             <span>
               注文照会
               <br />
               (取消)
             </span>
-          }
+          } */}
         </TabPanel>
       </TabContext>
     </DefaultLayout>
