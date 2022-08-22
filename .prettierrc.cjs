@@ -2,7 +2,7 @@
 
 module.exports = {
 	// 超过最大值换行
-	printWidth: 130,
+	printWidth: 200,
 	// 缩进字节数
 	tabWidth: 4,
 	// 使用制表符而不是空格缩进行

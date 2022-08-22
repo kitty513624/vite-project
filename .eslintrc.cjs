@@ -16,7 +16,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     "plugin:react-hooks/recommended",
     'plugin:react/jsx-runtime',
-		"plugin:prettier/recommended",
+	"plugin:prettier/recommended",
   ],
 	/* 指定如何解析语法 */
 	parser: "@typescript-eslint/parser",  // 将 TypeScript 转换成与 estree 兼容的形式，以便在ESLint中使用
@@ -34,6 +34,7 @@ module.exports = {
 	 * "error" 或 2  ==>  规则作为一个错误（代码不能执行，界面报错）
 	 */
   rules: {
+		'prettier/prettier': 'off',
 		'no-console': [0],
 		// eslint (http://eslint.cn/docs/rules)
 		'no-var': 'error', // 要求使用 let 或 const 而不是 var
@@ -48,7 +49,7 @@ module.exports = {
 		'@typescript-eslint/no-namespace': 'off', // 禁止使用自定义 TypeScript 模块和命名空间。
 		'@typescript-eslint/no-explicit-any': 'off', // 禁止使用 any 类型
 		// "@typescript-eslint/ban-ts-ignore": "off", // 禁止使用 @ts-ignore
-    "@typescript-eslint/ban-types": "off", // 禁止使用特定类型
+        "@typescript-eslint/ban-types": "off", // 禁止使用特定类型
 		"@typescript-eslint/explicit-function-return-type": "off", // 不允许对初始化为数字、字符串或布尔值的变量或参数进行显式类型声明
 		"@typescript-eslint/no-var-requires": "off", // 不允许在 import 语句中使用 require 语句
 		"@typescript-eslint/no-empty-function": "off", // 禁止空函数
