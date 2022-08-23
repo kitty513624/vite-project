@@ -17,7 +17,8 @@
         "@images/*": ["src/images/*" ],
         "@styles/*": ["src/styles/*" ],
         "@services/*": ["src/services/*" ],
-        "@types/*": ["src/types/*" ]
+        "@types/*": ["src/types/*" ],
+        "@test/*": ["src/test/*" ]
        }
     }
   }
